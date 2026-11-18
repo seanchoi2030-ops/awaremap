@@ -1,6 +1,7 @@
 # Awaremap
 
 **A map of what is actually happening around any point on Earth, built entirely from public data.**
+https://awaremap.pages.dev/
 
 ![Awaremap](cover.jpg)
 
