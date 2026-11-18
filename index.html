@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Awaremap — what's going on nearby</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">◎</span>
+    <div>
+      <h1>Awaremap</h1>
+      <p id="placeLabel">Locating…</p>
+    </div>
+  </div>
+
+  <form id="searchForm" class="search">
+    <input id="searchInput" type="search" placeholder="Search anywhere — “San Juan Capistrano”, “Manila”…" autocomplete="off" />
+    <button type="submit" title="Search">Go</button>
+  </form>
+
+  <div class="controls">
+    <label class="radius">
+      Radius
+      <select id="radius">
+        <option value="1">1 km</option>
+        <option value="3">3 km</option>
+        <option value="5" selected>5 km</option>
+        <option value="10">10 km</option>
+        <option value="25">25 km</option>
+        <option value="50">50 km</option>
+      </select>
+    </label>
+    <button id="exploreBtn" class="ghost" title="Show the non-safety layers">▸ Explore</button>
+    <button id="radarBtn" class="ghost" title="Live precipitation radar (RainViewer)">◍ Radar</button>
+    <button id="locateBtn" class="ghost" title="Use my location">◉ Me</button>
+    <button id="refreshBtn" class="ghost" title="Refresh">⟳</button>
+    <button id="settingsBtn" class="ghost" title="Settings">⚙</button>
+  </div>
+</header>
+
+<main>
+  <aside class="panel">
+    <div class="pills">
+      <div class="pill" id="pWeather"></div>
+      <div class="pill" id="pAir"></div>
+      <div class="pill" id="pSun"></div>
+      <div class="pill" id="pTide"></div>
+      <div class="pill" id="pMarine"></div>
+      <div class="pill" id="pFlood"></div>
+      <div class="pill" id="pAirport"></div>
+      <div class="pill" id="pISS"></div>
+      <div class="pill" id="pSpace"></div>
+    </div>
+
+    <div class="chips" id="chips"></div>
+
+    <div class="listhead">
+      <span id="countLabel">—</span>
+      <span id="updatedLabel"></span>
+    </div>
+
+    <ul class="feed" id="feed"></ul>
+
+    <footer class="sources" id="sources"></footer>
+  </aside>
+
+  <div id="map"><div id="radarTime" class="radar-time hidden"></div></div>
+</main>
+
+<div class="modal hidden" id="settings">
+  <div class="modal-card">
+    <h2>Settings</h2>
+    <p class="muted">12 of the 14 feeds need no key at all and are always on. These two add live commercial data.</p>
+
+    <label class="field">
+      <span>Ticketmaster Discovery API key <em>(optional — adds live concerts &amp; events)</em></span>
+      <input id="tmKey" type="password" placeholder="paste key to enable live events" />
+      <small>Stored only in this browser's localStorage. Free key at developer.ticketmaster.com.</small>
+    </label>
+
+    <label class="field">
+      <span>TomTom Traffic API key <em>(optional — adds crashes &amp; road closures)</em></span>
+      <input id="ttKey" type="password" placeholder="paste key to enable traffic incidents" />
+      <small>Stored only in this browser's localStorage. Free key at developer.tomtom.com.</small>
+    </label>
+
+    <label class="checkline">
+      <input id="autoRefresh" type="checkbox" checked /> Auto-refresh every 5 minutes
+    </label>
+
+    <div class="modal-actions">
+      <button id="settingsSave">Save</button>
+      <button id="settingsClose" class="ghost">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js?v=5"></script>
+</body>
+</html>
